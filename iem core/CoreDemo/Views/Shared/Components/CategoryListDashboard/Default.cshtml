@@ -1,0 +1,49 @@
+﻿@using EntityLayer.Concrete
+@model List<Category>
+
+
+
+
+<div class="row">
+    <div class="col-md-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Kategori</h4>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th> # </th>
+                                <th> Adı  </th>
+                                <th> Acıklama </th>
+                                <th> Durumu </th>
+                                
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach(var item in Model ) {
+                            <tr>
+                                <td> @item.CategoryId </td>
+                                <td> @item.Name </td>
+                                <td> @item.Description </td>
+                                <td> @if (item.Status) 
+                                      {
+                                       <p class="badge badge-success"> Aktif </p>                                 
+                                      }
+                                      else
+                                      {
+                                        <p class="badge badge-warning"> Pasif </p>
+                                      }
+                                </td>
+                                
+                            </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

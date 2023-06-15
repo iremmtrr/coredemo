@@ -1,0 +1,108 @@
+﻿@model IEnumerable<EntityLayer.Concrete.Blog>
+@using System.Web;
+@using System;
+@using System.IO;
+@using System.Text.Encodings.Web;
+
+@addTagHelper*, Microsoft.AspNetCore.Mvc.TagHelpers;
+@{
+    ViewData["Title"] = "BlogDetails";
+    Layout = "~/Views/Shared/UserLayout.cshtml";
+}
+
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="~/lib/jquery/dist/jquery.js"></script>
+
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!-- BlogReadAll -->
+
+
+
+<!DOCTYPE html>
+<html lang="zxx">
+
+
+<body>
+
+    <!--//banner-->
+    <section class="banner-bottom">
+        <!--/blog-->
+        <div class="container">
+            <div class="row">
+                <!--left-->
+                <div class="col-lg-8 left-blog-info-w3layouts-agileits text-left">
+
+
+
+                    @foreach (var item in Model)
+                    {
+                        <div class="blog-grid-top">
+                            <div class="b-grid-top">
+                                <div class="blog_info_left_grid">
+                                    <a href="#">
+                                        <img src="@item.Image" height="500px" width="1000px" class="img-fluid" alt="">
+                                    </a>
+                                </div>
+                                <div class="blog-info-middle">
+
+                                    <a href="#">
+                                        <i class="far fa-calendar-alt"></i> @(((DateTime)item.CreateDate).ToString("dd-MMM-yyyy"))
+                                    </a>
+
+                                </div>
+                            </div>
+
+                            <br />
+                            
+                            
+                            
+
+                            <p> @Html.Raw(@item.Content)</p>
+                              
+                            
+                            <a href="/blog/Index/" class="btn btn-success">  Diğer Haberler </a>
+                        </div>
+
+                    }
+
+                    @await Component.InvokeAsync("CommentListByBlog", new { id = ViewBag.i })
+
+
+
+                    @*@await Html.PartialAsync("~/Views/Comment/CommentListByBlog.cshtml")*@
+
+                    @await Html.PartialAsync("~/Views/Comment/PartialAddComment.cshtml" , new { id = ViewBag.c })
+
+                </div>
+
+                <!--//left-->
+                <!--right-->
+                <aside class="col-lg-4 agileits-w3ls-right-blog-con text-right">
+
+                    <div class="right-blog-info text-left">
+
+                        @await Html.PartialAsync("~/Views/NewsLetter/SubscribeMail.cshtml")
+
+
+                        @await Component.InvokeAsync("CategoryList")
+
+
+
+
+
+                    </div>
+            </div>
+
+            </aside>
+            <!--//right-->
+        </div>
+        </div>
+    </section>
+
+
+</body>
+
+</html>
+
